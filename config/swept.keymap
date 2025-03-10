@@ -19,6 +19,47 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+
+        symbol_return: symbol_return {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SYMBOL_RETURN";
+            #binding-cells = <0>;
+            bindings = <&mo 1>, <&kp ENTER>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        single_quote {
+            bindings = <&kp SINGLE_QUOTE>;
+            key-positions = <19 20>;
+        };
+
+        double_quote {
+            bindings = <&kp DOUBLE_QUOTES>;
+            key-positions = <7 8>;
+        };
+
+        escape {
+            bindings = <&kp ESC>;
+            key-positions = <15 14>;
+        };
+
+        grave {
+            bindings = <&kp GRAVE>;
+            key-positions = <15 16>;
+        };
+
+        tilde {
+            bindings = <&kp TILDE>;
+            key-positions = <3 4>;
+        };
+
+        caps_word {
+            bindings = <&caps_word>;
+            key-positions = <26 27>;
+        };
     };
 
     keymap {
@@ -27,30 +68,30 @@
         default_layer {
             label = "DEF";
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E     &kp R  &kp T           &kp Y      &kp U  &kp I          &kp O    &kp P          &kp BSPC
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D     &kp F  &kp G           &kp H      &kp J  &kp K          &kp L    &kp SEMICOLON  &kp SQT
-&kp LCTRL       &kp Z  &kp X  &kp C     &kp V  &kp B           &kp N      &kp M  &kp COMMA      &kp DOT  &kp SLASH      &kp ENTER
-                              &kp LALT  &mo 1  &kp KP_ENTER    &kp SPACE  &mo 2  &kp RIGHT_WIN
+&none  &kp Q               &kp W           &kp E             &kp R           &kp T        &kp Y           &kp U            &kp I              &kp O            &kp P                &none
+&none  &mt LEFT_CONTROL A  &mt LEFT_ALT S  &mt LEFT_SHIFT D  &mt LEFT_GUI F  &kp G        &kp H           &mt RIGHT_GUI J  &mt RIGHT_SHIFT K  &mt RIGHT_ALT L  &mt RCTRL SEMICOLON  &none
+&none  &kp Z               &kp X           &kp C             &kp V           &kp B        &kp N           &kp M            &kp COMMA          &kp DOT          &kp SLASH            &none
+                                           &none             &lt 2 TAB       &kp SPACE    &symbol_return  &kp BACKSPACE    &none
             >;
         };
 
         symbols_layer {
             label = "SYMB";
             bindings = <
-&kp ESC    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4    &kp N5          &kp NUMBER_6          &kp NUMBER_7           &kp NUMBER_8    &kp NUMBER_9     &kp NUMBER_0  &kp BSPC
-&kp GRAVE  &none         &none         &none         &kp MINUS       &kp EQUAL       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp BSLH      &trans
-&kp TAB    &none         &none         &none         &kp UNDERSCORE  &kp PLUS        &kp LBKT              &kp RIGHT_BRACKET      &kp TILDE       &kp GRAVE        &trans        &kp ENTER
-                                       &kp LCMD      &trans          &kp KP_ENTER    &kp SPACE             &mo 3                  &kp RWIN
+&trans  &kp PERCENT  &kp N7        &kp N8        &kp N9        &kp AT_SIGN    &kp EXCLAMATION  &kp AMPERSAND  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp ASTERISK   &trans
+&trans  &kp N0       &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp HASH       &kp MINUS        &kp EQUAL      &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE       &trans
+&trans  &kp CARET    &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp DOLLAR     &kp UNDERSCORE   &kp PLUS       &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp BACKSLASH  &trans
+                                   &trans        &trans        &trans         &trans           &trans         &trans
             >;
         };
 
         arrows_layer {
             label = "NAV";
             bindings = <
-&kp ESC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3   &bt BT_CLR           &kp HOME  &trans    &kp UP    &none      &none  &kp BSPC
-&none    &none         &kp C_PP      &kp C_NEXT    &kp PAGE_UP    &kp C_VOLUME_UP      &kp END   &kp LEFT  &kp DOWN  &kp RIGHT  &none  &kp RET
-&kp TAB  &none         &none         &kp C_PREV    &kp PAGE_DOWN  &kp C_VOLUME_DOWN    &trans    &trans    &none     &none      &none  &none
-                                     &kp LCMD      &mo 4          &trans               &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &bt BT_SEL 0    &bt BT_SEL 3  &kp C_PP    &kp C_PREV         &kp C_NEXT            &trans  &trans
+&none   &trans  &trans  &trans  &trans  &bt BT_SEL 1    &bt BT_SEL 4  &kp K_MUTE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP       &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &bt BT_SEL 2    &bt BT_CLR    &kp CAPS    &kp C_BRI_DEC      &kp C_BRIGHTNESS_INC  &trans  &trans
+                        &trans  &trans  &trans          &kp ENTER     &mo 3       &trans
             >;
         };
 
